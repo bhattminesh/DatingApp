@@ -31,9 +31,9 @@ namespace API
             services.AddDbContext<DataContext>(options => {
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            services.AddCors();
             services.AddControllers();
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +48,8 @@ namespace API
 
             app.UseRouting();
 
+            app.UseCors(policy => policy.AllowAnyMethod().AllowAnyMethod().WithOrigins("http://localhost:4200"));
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
