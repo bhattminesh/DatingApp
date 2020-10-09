@@ -1,5 +1,5 @@
 
-namespace API.Entitities
+namespace API.Entities
 {
     public class AppUser
     {

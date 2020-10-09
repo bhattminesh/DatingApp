@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="Container">
+        <a class="navbar-brand" href="#">Dating App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Matches <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Lists</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Messages</a>
+            </li>
+          </ul>
+          <form #loginForm="ngForm" class="form-inline mt-2 mt-md-0" 
+            (ngSubmit)="login()" autocomplete="off" >
+            <input 
+                name="userName"
+                [(ngModel)] ="model.userName"
+                class="form-control mr-sm-2" type="text" placeholder="Username">
+            <input 
+                name="password"
+                [(ngModel)] = "model.password" 
+                class="form-control mr-sm-2" type="password" placeholder="Password">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+          </form>
+        </div>
+     </div>
+  </nav>

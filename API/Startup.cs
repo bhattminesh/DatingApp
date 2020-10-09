@@ -12,7 +12,12 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
-
+using API.Interfaces;
+using API.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using API.Extensions;
 
 namespace API
 {
@@ -28,12 +33,12 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(options => {
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
-            });
+            services.AddApplicationServices(Configuration);
 
             services.AddCors();
             services.AddControllers();
+
+            services.AddIdentityServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,9 +53,12 @@ namespace API
 
             app.UseRouting();
 
-            app.UseCors(policy => policy.AllowAnyMethod().AllowAnyMethod().WithOrigins("http://localhost:4200"));
-            
+            app.UseCors(policy => policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:4200"));
+
+            app.UseAuthentication();
+
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {
