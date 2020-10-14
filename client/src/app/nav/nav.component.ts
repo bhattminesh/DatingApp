@@ -1,4 +1,4 @@
-import { AccoutService } from './../services/accout.service';
+import { AccoutService } from './../_services/accout.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -15,14 +15,22 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {}
 
   login() {
+    
     this.accountService.login(this.model).subscribe(
       (response) => {
         console.log(response);
         this.loggedIn = true;
+        console.log(this.loggedIn);
       },
       (error) => {
         console.log(error);
       }
     );
+    
+    }
+   
+   logout(){
+    
+    this.loggedIn = false;
   }
 }
